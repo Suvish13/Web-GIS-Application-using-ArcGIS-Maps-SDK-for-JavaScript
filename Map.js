@@ -52,14 +52,7 @@ function showApp() {
         
       ]
     };
-    const hotelRenderer = {
-      type: "unique-value",
-      field: "fclass",
-      defaultSymbol: { type: "simple-marker", color: "yellow", style: "diamond", size: "14px", outline: { color: "white", width: 1 } },
-      uniqueValueInfos: [
-        { value: "School", symbol: { type: "simple-marker", style: "triangle",color: "purple", size: "14px" }, label: "School" }
-      ]
-    };
+    
     const BankLayer = new FeatureLayer({
       url: "https://services6.arcgis.com/JkqsQtq5tL21OFYa/arcgis/rest/services/Banks_in_Tiruchirapalli_Municipality/FeatureServer",
       outFields: ["*"],
@@ -116,7 +109,15 @@ function showApp() {
     const HotelLayer = new FeatureLayer({
       url: "https://services6.arcgis.com/JkqsQtq5tL21OFYa/arcgis/rest/services/Hotels/FeatureServer",
       title: "Hotels",
-      renderer: hotelRenderer,
+      renderer: {
+        type: "simple",
+        symbol: {
+          type: "simple-marker",
+         style: "triangle",
+         color: "purple", 
+         size: "14px"
+        }
+      },
       popupTemplate: {
       title: "{name}",
         content: [{
