@@ -72,7 +72,6 @@ footer {
   color: #333;
 }
 
-/* Map App */
 #appContainer {
   display: none;
   height: 100vh;
@@ -94,4 +93,29 @@ footer {
 #featureTableDiv {
   display: none;
   height: 200px;
+}
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .description {
+    max-width: 100%;
+    font-size: 14px;
+  }
+
+  .image img {
+    max-width: 100%;
+  }
+
+  #landing {
+    padding: 20px 10px;
+  }
+
+  .buttons .btn {
+    width: 100%;
+    margin: 5px 0;
+  }
 }
