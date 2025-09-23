@@ -29,7 +29,7 @@ function showApp() {
       container: "viewDiv",
       map: map,
       center: [78.686, 10.796],
-      zoom: 13
+      zoom: 12
     });
 
     const bankRenderer = {
