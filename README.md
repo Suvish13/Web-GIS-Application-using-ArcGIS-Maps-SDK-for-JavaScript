@@ -1,2 +1,1 @@
-Web based GIS Application using ArcGIS Map SDK for Javascript
-Features layers are hosted and used to visualize in map view
+A web-based GIS application built using ArcGIS Maps SDK for JavaScript to visualize and explore geographic information of Tiruchirapalli city. The application provides an interactive map interface with points of interest (POIs) such as banks, ATMs, and educational institutions, along with a responsive landing page showcasing the city's description and landmarks.
