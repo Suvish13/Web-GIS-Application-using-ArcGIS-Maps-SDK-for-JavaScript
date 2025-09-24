@@ -98,7 +98,7 @@ function showApp() {
     const BankLayer = new FeatureLayer({
       url: "https://services6.arcgis.com/JkqsQtq5tL21OFYa/arcgis/rest/services/Banks_in_Tiruchirapalli_Municipality/FeatureServer",
       outFields: ["*"],
-      title: "Banks/ATM's in Trichy Municipality",
+      title: "Banks/ATM's",
       renderer: bankRenderer,
       popupTemplate: {
         title: "{name}",
