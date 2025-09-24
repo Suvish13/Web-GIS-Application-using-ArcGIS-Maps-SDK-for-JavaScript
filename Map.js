@@ -17,10 +17,11 @@ function showApp() {
     "esri/widgets/LayerList",
     "esri/widgets/Locate",
     "esri/layers/FeatureLayer",
-    "esri/widgets/FeatureTable"
+    "esri/widgets/FeatureTable",
+    "esri/symbols/WebStyleSymbol"
   ], (
     Map, MapView, BasemapGallery, Search, ScaleBar, CoordinateConversion, Home, Expand,
-    Legend, LayerList, Locate, FeatureLayer, FeatureTable
+    Legend, LayerList, Locate, FeatureLayer, FeatureTable,WebStyleSymbol
   ) => {
 
     const map = new Map({ basemap: "topo" });
@@ -31,28 +32,69 @@ function showApp() {
       center: [78.686, 10.796],
       zoom: 12
     });
-
-    const bankRenderer = {
-      type: "unique-value",
-      field: "fclass",
-      defaultSymbol: { type: "simple-marker", color: "black", size: "14px", outline: { color: "white", width: 1 } },
-      uniqueValueInfos: [
-        { value: "Bank", symbol: { type: "simple-marker", color: "red", size: "14px" }, label: "Bank" },
-        { value: "Atm", symbol: { type: "simple-marker", color: "blue", size: "14px" }, label: "ATM" }
-        
+    const schoolSymbol = new WebStyleSymbol({
+    name: "School_POI-Large_3",
+    styleUrl: "https://cdn.arcgis.com/sharing/rest/content/items/11e7b433c72a4cef90c8a428de131147/data"
+    });
+    const universitySymbol = new WebStyleSymbol({
+      name: "University_POI-Large_3",
+      styleUrl: "https://cdn.arcgis.com/sharing/rest/content/items/11e7b433c72a4cef90c8a428de131147/data"
+    });
+    const hotelSymbol = new WebStyleSymbol({
+      name: "Hotel",
+      styleUrl: "https://cdn.arcgis.com/sharing/rest/content/items/6eeef46c653b40c9bda04f9bed913b70/data"
+    });
+    const atmSymbol = new WebStyleSymbol({
+  name: "Training",
+  styleUrl: "https://cdn.arcgis.com/sharing/rest/content/items/806df898e9c04516a704a9f93e2a0a5e/data"
+});
+ const bankSymbol = new WebStyleSymbol({
+  name: "Government Office",
+  styleUrl: "https://cdn.arcgis.com/sharing/rest/content/items/806df898e9c04516a704a9f93e2a0a5e/data"
+});
+  const bankRenderer = {
+  type: "unique-value",
+  field: "fclass",
+  uniqueValueInfos: [
+    {
+      value: "Bank",
+      symbol: bankSymbol,  
+      label: "Bank"
+    },
+    {
+      value: "Atm",
+      symbol: atmSymbol,  
+      label: "ATM"
+    }
       ]
     };
-    const educationRenderer = {
-      type: "unique-value",
-      field: "fclass",
-      defaultSymbol: { type: "simple-marker", color: "yellow", style: "diamond", size: "14px", outline: { color: "white", width: 1 } },
-      uniqueValueInfos: [
-        { value: "School", symbol: { type: "simple-marker", style: "diamond",color: "Green", size: "14px" }, label: "School" },
-        { value: "University", symbol: { type: "simple-marker", style: "diamond", color: "orange", size: "14px" }, label: "University" }
-        
-      ]
-    };
-    
+  const educationRenderer = {
+  type: "unique-value",
+  field: "fclass",
+  uniqueValueInfos: [
+    {
+      value: "School",
+      symbol: schoolSymbol,  
+      label: "School"
+    },
+    {
+      value: "University",
+      symbol: universitySymbol,      
+      label: "College"
+    }
+  ]
+};
+    const hotelRenderer = {
+  type: "unique-value",
+  field: "fclass",
+  uniqueValueInfos: [
+    {
+      value: "Hotel",
+      symbol: hotelSymbol,  
+      label: "Hotel"
+    } 
+  ]
+};
     const BankLayer = new FeatureLayer({
       url: "https://services6.arcgis.com/JkqsQtq5tL21OFYa/arcgis/rest/services/Banks_in_Tiruchirapalli_Municipality/FeatureServer",
       outFields: ["*"],
@@ -109,15 +151,7 @@ function showApp() {
     const HotelLayer = new FeatureLayer({
       url: "https://services6.arcgis.com/JkqsQtq5tL21OFYa/arcgis/rest/services/Hotels/FeatureServer",
       title: "Hotels",
-      renderer: {
-        type: "simple",
-        symbol: {
-          type: "simple-marker",
-         style: "triangle",
-         color: "purple", 
-         size: "14px"
-        }
-      },
+      renderer:hotelRenderer,
       popupTemplate: {
       title: "{name}",
         content: [{
