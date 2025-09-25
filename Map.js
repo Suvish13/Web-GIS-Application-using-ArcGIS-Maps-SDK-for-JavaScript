@@ -52,6 +52,10 @@ function showApp() {
   name: "Government Office",
   styleUrl: "https://cdn.arcgis.com/sharing/rest/content/items/806df898e9c04516a704a9f93e2a0a5e/data"
 });
+const hospitalSymbol = new WebStyleSymbol({
+  name: "Hospital",
+  styleUrl: "https://cdn.arcgis.com/sharing/rest/content/items/6eeef46c653b40c9bda04f9bed913b70/data"
+});
   const bankRenderer = {
   type: "unique-value",
   field: "fclass",
@@ -92,6 +96,17 @@ function showApp() {
       value: "Hotel",
       symbol: hotelSymbol,  
       label: "Hotel"
+    } 
+  ]
+};
+ const hospitalRenderer = {
+  type: "unique-value",
+  field: "fclass",
+  uniqueValueInfos: [
+    {
+      value: "Hospital",
+      symbol: hospitalSymbol,  
+      label: "Hospital"
     } 
   ]
 };
@@ -165,6 +180,24 @@ function showApp() {
     });
 
     map.add(HotelLayer);
+
+    const hospitalLayer = new FeatureLayer({
+      url: "https://services6.arcgis.com/JkqsQtq5tL21OFYa/arcgis/rest/services/hospitals/FeatureServer",
+      title: "Hospitals",
+      renderer:hospitalRenderer,
+      popupTemplate: {
+      title: "{Type}",
+        content: [{
+          type: "fields",
+          fieldInfos: [
+            { fieldName: "fclass", label: "Function class" },
+            
+          ]
+        }]
+      }
+    });
+
+    map.add(hospitalLayer);
 
     const featureTable = new FeatureTable({
       view: view,
